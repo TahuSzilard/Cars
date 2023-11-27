@@ -1,5 +1,7 @@
 <?php
 require_once('csv-tools.php');
+require_once('cardb.php');
+
 ini_set('memorí_limit', '560M');
 
 $fileName = 'car-db.csv';
@@ -11,14 +13,10 @@ if(empty($csvData))
     return false;
 }
 
-$makers = getMakers($csvData);
-$mysqli = new mysqli("localhost","my_user","my_password","my_db");
+$makers = getMakers([]);
 
 
-if ($mysqli -> connect_errno) {
-  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-  exit();
-}
+
 
 print_r($result);
 print_r($makers);

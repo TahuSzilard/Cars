@@ -16,6 +16,19 @@ function getCsvData($fileName)
     return $lines;
 
 }
+
+
+$mysqli->close();
+
+
+
+
+
+
+
+
+
+
 function getMakers($csvData)
 {
     $header = $csvData[0];
@@ -45,14 +58,16 @@ function getMakers($csvData)
                 $maker = $data[$keyMaker];
                 $makers [] = $maker;
             }
-
+/*
         if($model != $data[$keyMaker])
             {
                 $model = $data[$keyMaker];
                 $result[$maker][] = $model;
             }
+*/
     }
     return $makers;
+    print_r($makers);
 }
 
 ?>
