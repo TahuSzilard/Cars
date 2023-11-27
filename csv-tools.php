@@ -14,7 +14,45 @@ function getCsvData($fileName)
     fclose($csvFile);
 
     return $lines;
-    
-   
+
 }
+function getMakers($csvData)
+{
+    $header = $csvData[0];
+
+    $keyMaker = array_search('make', $header);
+    $result = [];
+    $maker = '';
+    $model = '';
+    $makers = [];
+    $isHeader = true;
+
+    foreach($csvData as $data)
+    {
+        if(!is_array($data))
+        {
+            continue;
+        }
+
+        if($isHeader)
+        {
+            $isHeader = false;
+            continue;
+        }
+
+        if($maker != $data[$keyMaker])
+            {
+                $maker = $data[$keyMaker];
+                $makers [] = $maker;
+            }
+
+        if($model != $data[$keyMaker])
+            {
+                $model = $data[$keyMaker];
+                $result[$maker][] = $model;
+            }
+    }
+    return $makers;
+}
+
 ?>

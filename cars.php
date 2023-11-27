@@ -11,39 +11,15 @@ if(empty($csvData))
     return false;
 }
 
-$header = $csvData[0];
+$makers = getMakers($csvData);
+$mysqli = new mysqli("localhost","my_user","my_password","my_db");
 
-$keyMaker = array_search('make', $header);
-$result = [];
-$maker = '';
-$model = '';
-$makers = [];
-$isHeader = true;
-foreach($csvData as $data)
-{
-    if(!is_array($data))
-    {
-        continue;
-    }
 
-    if($isHeader)
-    {
-        $isHeader = false;
-        continue;
-    }
-
-    if($maker != $data[$keyMaker])
-        {
-            $maker = $data[$keyMaker];
-            $makers [] = $maker;
-        }
-
-    if($model != $data[$keyMaker])
-        {
-            $model = $data[$keyMaker];
-            $result[$maker][] = $model;
-        }
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  exit();
 }
+
 print_r($result);
 print_r($makers);
 
